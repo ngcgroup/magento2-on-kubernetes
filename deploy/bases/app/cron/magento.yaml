@@ -32,7 +32,8 @@ spec:
                 name: config
           containers:
           - name: magento-cron
-            image: kiweeteam/magento2:2.3.7-p2-1
+            #image: kiweeteam/magento2:2.3.7-p2-1
+            image: kiweeteam/magento2:2.4-dev
             command: ["/bin/sh"]
             args:
             - -c
@@ -43,6 +44,8 @@ spec:
                 name: config
             - configMapRef:
                 name: additional
+            - configMapRef:
+                name: env-bindings-cm            
             resources:
               limits:
                 cpu: 500m

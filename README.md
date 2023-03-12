@@ -44,3 +44,5 @@ make step-3
 # Deploy step-3 with Varnish
 make step-4
 ```
+
+apt-get update && apt-get install procps telnet net-tools

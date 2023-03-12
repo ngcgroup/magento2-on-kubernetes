@@ -8,6 +8,7 @@ resources:
 - ingress/main.yaml
 - cron/magento.yaml
 - jobs/install.yaml
+- pvc/pv.yaml
 - pvc/media.yaml
 
 configMapGenerator:
