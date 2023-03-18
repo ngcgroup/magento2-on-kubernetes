@@ -33,7 +33,8 @@ spec:
           containers:
           - name: magento-cron
             #image: kiweeteam/magento2:2.3.7-p2-1
-            image: kiweeteam/magento2:2.4-dev
+            #image: kiweeteam/magento2:2.4-dev
+            image: 982306614752.dkr.ecr.us-west-2.amazonaws.com/magento:2.4.5
             command: ["/bin/sh"]
             args:
             - -c

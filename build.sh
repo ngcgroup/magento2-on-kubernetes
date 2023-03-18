@@ -14,29 +14,12 @@ done
 parse_args $@
 source_env_from_aws
 registry=982306614752.dkr.ecr.us-west-2.amazonaws.com
-version=latest
+version=2.4.5
 
-#docker build --target pimcore-web-builder -t pimcore-web . -f Dockerfile
-#pimcore_web_image_tag=$registry/pimcore-web:${version}
-#docker tag pimcore-web:latest $pimcore_web_image_tag
-
-docker build ./override -t pimcore:latest -f Dockerfile
-pimcore_image_tag=$registry/pimcore:${version}
-docker tag pimcore:latest $pimcore_image_tag
-
-#docker build --target pimcore-supervisor-builder -t pimcore-supervisor . -f Dockerfile
-#pimcore_supervisor_image_tag=$registry/pimcore-supervisor:${version}
-#docker tag pimcore-supervisor:latest $pimcore_supervisor_image_tag
-
+cd src/
+docker build ./ -t magento:latest -f Dockerfile
+cd -
+commerce_image_tag=$registry/magento:${version}
+docker tag magento:latest $commerce_image_tag
 docker_login $registry
-
-#docker_push $pimcore_web_image_tag
-docker_push $pimcore_image_tag
-#docker_push $pimcore_supervisor_image_tag
-
-#if [ "$docker_login" == "true" ];then
-#	aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 982306614752.dkr.ecr.us-west-2.amazonaws.com
-#fi
-#if [ "$docker_push" == "true" ];then
-#	docker push 982306614752.dkr.ecr.us-west-2.amazonaws.com/keycloak:latest
-#fi
+docker_push $commerce_image_tag

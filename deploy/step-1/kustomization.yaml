@@ -4,5 +4,6 @@ metadata:
   name: step-1
 
 bases:
-- ../bases/app
-#- ../bases/database
+  - ../bases/app
+  #- ../bases/database
+  - ../bases/elasticsearch

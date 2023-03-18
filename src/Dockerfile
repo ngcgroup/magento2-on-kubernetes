@@ -72,6 +72,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY --chown=www-data composer.json composer.json
 COPY --chown=www-data composer.lock composer.lock
+#COPY --chown=www-data app/etc/vendor_path.php app/etc/vendor_path.php
+RUN php $(which composer) require magento/composer-root-update-plugin=~1.0 --no-update
+RUN php $(which composer) require elasticsearch/elasticsearch=~8.0 --no-update
+RUN php $(which composer) require magento/product-community-edition=2.4.5-p1 --no-update
+
+RUN php $(which composer) config --no-plugins allow-plugins.magento/composer-dependency-version-audit-plugin true
+RUN php $(which composer) update -W
 
 RUN php -d memory_limit=2G $(which composer) install --no-progress --no-dev
 

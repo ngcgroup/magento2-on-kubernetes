@@ -1,3 +1,4 @@
+
 {
     "name": "magento/project-community-edition",
     "description": "eCommerce Platform for Growth (Community Edition)",
@@ -8,12 +9,19 @@
     ],
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "magento/magento-composer-installer": true,
+            "magento/inventory-composer-installer": true,
+            "laminas/laminas-dependency-plugin": true,
+            "magento/composer-root-update-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
-    "version": "2.3.7-p3",
+    "version": "2.4.5-p1",
     "require": {
         "magento/composer-root-update-plugin": "~1.1",
-        "magento/product-community-edition": "2.3.7-p3"
+        "magento/product-community-edition": "2.4.5-p1"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -38,12 +46,12 @@
         }
     },
     "require-dev": {
-        "allure-framework/allure-phpunit": "~1.2.0",
+        "allure-framework/allure-phpunit": "~1.5.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "friendsofphp/php-cs-fixer": "~2.16.0",
         "lusitanian/oauth": "~0.8.10",
         "magento/magento-coding-standard": "*",
-        "magento/magento2-functional-testing-framework": "^2.7",
+        "magento/magento2-functional-testing-framework": "^3.7",
         "pdepend/pdepend": "~2.7.1",
         "phpcompatibility/php-compatibility": "^9.3",
         "phpmd/phpmd": "^2.8.0",
