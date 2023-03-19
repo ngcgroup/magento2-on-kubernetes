@@ -7,3 +7,5 @@ bases:
   - ../bases/app
   #- ../bases/database
   - ../bases/elasticsearch
+resources:
+  - hpa/magento-web.yaml

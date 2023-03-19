@@ -47,7 +47,8 @@ function source_env_from_aws() {
   IFS=$'\n'; 
   rm -rf env-file
   echo "## title ##" >> env-file
-  for line in $(aws ssm get-parameters-by-path ${profile} --path $app --query "Parameters[*].{Name:Name,Value:Value}" | jq -r '.[] |[.Name, .Value] | @tsv' | sed "s/${app2}//g" | sed "s/^\///g" |awk -F '\t' '{print $1"="$2}'); do
+  filter=$(aws ssm get-parameters-by-path  ${profile} --path $app --query "Parameters[*].Name" --parameter-filters "Key=Label,Option=Equals,Values=disable" | jq -r 'flatten | join ("\\|")');
+  for line in $(aws ssm get-parameters-by-path ${profile} --path $app --query "Parameters[*].{Name:Name,Value:Value}" | jq -r '.[] |[.Name, .Value] | @tsv' | grep -v $filter | sed "s/${app2}//g" | sed "s/^\///g" |awk -F '\t' '{print $1"="$2}'); do
     if [[ "$line" =~ ^([a-zA-Z0-9_]*)=(.*)$ ]]; then 
       export ${BASH_REMATCH[1]}=${BASH_REMATCH[2]}; 
       echo ${BASH_REMATCH[1]}=${BASH_REMATCH[2]} >> env-file

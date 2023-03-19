@@ -6,4 +6,4 @@ configMapGenerator:
     envs:
       - env-file
 bases:
-- deploy/step-1
+- deploy/step-4

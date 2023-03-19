@@ -43,7 +43,7 @@ spec:
           - -c
           - |
             varnishd -a :80 -a :6091 -f /etc/varnish/default.vcl -s default,512M;
-            varnishncsa -F '%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i" %{Varnish:handling}x'
+            varnishncsa -b -c -F '%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i" %{Varnish:handling}x'
         ports:
         - containerPort: 80
         - containerPort: 6091
@@ -53,9 +53,9 @@ spec:
             memory: 512Mi
         env:
         - name: VARNISH_BACKEND_HOST
-          value: web
+          value: magento-web
         - name: VARNISH_BACKEND_PORT
-          value: "80"
+          value: "8080"
         volumeMounts:
         - name: config
           mountPath: /etc/varnish/default.vcl
